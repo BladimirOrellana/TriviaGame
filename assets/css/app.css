@@ -9,17 +9,50 @@ body{
 .main-wrapper{
     max-width: 960px;
     margin: 0 auto;
-}
 
-.launch-screen{
+}
+.main-background{
     max-width: 960px;
     background: black;
     opacity: 0.9;
     height: 100vh;
     position: relative;
     text-align: center;
-}
+   
 
+}
+.launch-screen{
+   
+}
+.hidden{
+    display: none;
+}
+.buttons-container{
+    max-width: 960px;
+    margin: 0 auto;
+    background: red;
+    padding: 10px;
+    position: relative;
+    
+}
+.buttons-container::after{
+    display: block;
+    content: " ";
+    clear: both;
+
+    
+}
+.soundOnOffButton{
+    background: transparent;
+    border: none;
+    outline: none;
+ float: right;
+ clear: both;
+}
+.volume-icon{
+color: black;
+font-size: 20px;
+}
 .title-container{
     font-size: 20px;
     max-width: 100%;
@@ -106,3 +139,76 @@ body{
     }
     
     }
+
+  /*---CATEGORIES CONTAINER---*/
+  .categories-container{
+      max-width: 500px;
+      margin: 0 auto;
+      background: red;
+      padding: 20px;
+      position: absolute;
+      border-radius: 10px;
+      border: 4px solid white;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%); 
+
+  }
+
+  .category{
+      display: block;
+      margin-top: 10px;
+      width: 200px;
+      padding: 20px;
+      background: black;
+      color: red;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: 2px solid white;
+      border-radius: 100px;
+      outline: none;
+
+
+  }
+  .category:hover{
+      color: white;
+  }
+/*---PLAY CONTAINER---*/
+.question-container{
+    max-width: 500px;
+    margin: 0 auto;
+    background: black;
+    padding: 10px;
+    position: absolute;
+    border-radius: 10px;
+    border: 4px solid white;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  color: white;
+}
+  .play-container{
+    max-width: 500px;
+    margin: 0 auto;
+    background: red;
+    padding: 20px;
+    position: absolute;
+    border-radius: 10px;
+    border: 4px solid white;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  }
+  .options-div{
+    display: block;
+    margin-top: 10px;
+    width: 400px;
+    padding: 30px;
+    background: black;
+    color: red;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 2px solid white;
+    border-radius: 100px;
+    outline: none;
+  }
