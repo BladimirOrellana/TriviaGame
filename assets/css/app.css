@@ -151,6 +151,17 @@ font-size: 20px;
 }
 
 }
+.timer-container{
+    background: black;
+    opacity: 0.9;
+    text-align: center;
+    padding: 10px;
+}
+
+#timer{
+    color: red;
+     
+}
 /*---AMIAMTE TITLE--*/
 @keyframes titleFadeIn{
     0%{
@@ -243,7 +254,7 @@ font-size: 20px;
 
   /*---CORRECT CONTAINER---*/
 .correct-container{
-    max-width: 500px;
+    max-width: 100px;
     margin: 0 auto;
     background: black;
     padding: 10px;
@@ -271,4 +282,16 @@ font-size: 20px;
   transform: translate(-50%, -10%);
   color:red;
   box-shadow: 10px 10px 100px red;
+}
+.correct-answer-container{
+    max-width: 500px;
+    margin: 0 auto;
+    background: red;
+    padding: 20px;
+    position: absolute;
+    border-radius: 10px;
+    border: 4px solid white;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%); 
 }
