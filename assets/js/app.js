@@ -11,6 +11,39 @@ var soundOnOff = false;
 // CATEGIRIES VARIABLES
 var categoriesHtml = ['html','css','javascriH3T','jquery'];
 
+//WINER VARIABLE
+var winner = '';
+//LOSSER VARIABLE
+var loser = '';
+//INTERVAL TIMER
+var timer = 5 + 1;
+function timerFuntion(){
+
+var timerV = setInterval(activateTimer, 1000);
+
+function activateTimer(){
+    timer--;
+    console.log(timer)
+    if(timer === 0){
+        console.log("Time's UP") 
+        loser++;
+        $(".loser").html("Wrong " + loser);
+        $(".score").show();
+        $(".play").hide();
+        $(".wrong").show();
+        $(".wrong-container").html("Times's Up");
+        stopTimer()
+    }
+}
+
+function stopTimer(){
+
+    clearInterval(timerV);
+}
+
+}
+
+
 
 //RANDON QUESTION VARIABLE
 var randonQuestionH3Tag;
@@ -66,9 +99,10 @@ var categoriesFuntion = function(){
             $(".categories-container").append(category);
 
             $(category).on('click', function(){
+                clickSound.play();
                 console.log($(this).attr("id"));
                 if($(this).attr("id") === "html"){
-                    hideCategoriesFuntions();
+                    timerFuntion();
                     htmlFunction();
                 }
             })
@@ -106,30 +140,53 @@ function showCategoriesFuntions(){
 
         function showPlayFunction(){
             $(".play").show();
+            
         }
 
-        // HTML CATEGORY FUNCTION
+        // HTML  CATEGORY FUNCTION
         function htmlFunction(){
   setTimeout(function(){
                 hideCategoriesFuntions();
                 showPlayFunction();
                 randonQuestionH3Tag =$("<h3>");
                 randonQuestionH3Tag.html(categoryHtmlQuestionsRandon);
+                randonQuestionH3Tag.attr("data-categoty",categoryHtmlQuestionsRandon);  
                 $(".question-container").append(randonQuestionH3Tag);
-                randonQuestionH3Tag.attr("id", [a]);
+                
                 for (var a = 0; a<categoryHtmlOptios.length; a++){
-                    
+                   
                   var   categoryNewDiv = $("<div>");
+                  categoryNewDiv.attr("data-id", categoryHtmlQuestions[a]);
                   categoryNewDiv.addClass("options-div");
-                  categoryNewDiv.attr("data-id", [a]);
                   categoryNewDiv.html(categoryHtmlOptios[a]);
                   $(".play-container").append(categoryNewDiv);
                   //ALEX COMTINUE WORKING  HERE
                   $(categoryNewDiv).on('click', function(){
-                      if($(this).attr("data-id") === randonQuestionH3Tag.attr("id")){
-                       alert("K")
+                    
+                    clickSound.play();
+                    if($(this).attr("data-id") === categoryHtmlQuestionsRandon ){
+                        
+                        winner++;
+                        $(".winner").html("Correct " + winner);
+                        $(".score").show();
+                       $(".play").hide();
+                       $(".correct").show();
+                       $(".correct-container").html("CORRECT");
+                       stopTimer();
+                        
+
                       }else{
-                        alert("NOP")
+                        
+                        loser++;
+                        $(".loser").html("Wrong " + loser);
+                        $(".score").show();
+                        $(".play").hide();
+                        $(".wrong").show();
+                        $(".wrong-container").html("WRONG");
+                        
+                        if(loser > 0){
+                            
+                        }
                       }
                       
                   })

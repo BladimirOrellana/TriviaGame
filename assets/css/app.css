@@ -67,6 +67,34 @@ font-size: 20px;
     animation: titleFadeIn 3s;
    
 }
+/*--WINNER AND LOSER--*/
+.score{
+    max-width: 200px;
+    margin: 0 auto;
+    background: black;
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+}
+.score::after{
+    display: block;
+    content: " ";
+    clear: both;
+
+    
+}
+.winner{
+    color: yellowgreen;
+   display: inline;
+   float: left;
+   
+}
+.loser{
+    color: red;
+    display: inline;
+    float: right;
+  
+}
 /*--BUTTON--*/
 
 .btn{
@@ -212,3 +240,35 @@ font-size: 20px;
     border-radius: 100px;
     outline: none;
   }
+
+  /*---CORRECT CONTAINER---*/
+.correct-container{
+    max-width: 500px;
+    margin: 0 auto;
+    background: black;
+    padding: 10px;
+    position: absolute;
+    border-radius: 10px;
+    border: 4px solid yellowgreen;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  color: yellowgreen;
+  box-shadow: 10px 10px 100px greenyellow;
+}
+
+ /*---WRONG CONTAINER---*/
+ .wrong-container{
+    max-width: 500px;
+    margin: 0 auto;
+    background: black;
+    padding: 10px;
+    position: absolute;
+    border-radius: 10px;
+    border: 4px solid red;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  color:red;
+  box-shadow: 10px 10px 100px red;
+}
