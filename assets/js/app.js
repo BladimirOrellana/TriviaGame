@@ -12,15 +12,23 @@ var sounds = {
 var clickSound = new Audio("assets/sound/click.mp3");
 var questionBackGroundSound = new Audio("assets/sound/question-sound-background.mp3")
 var soundOnOff = false;
+// CREATE A VARIABLE TO FOR NETX QUESTION
+var showNextQuestion;
+var count = 0;
 
 // CATEGIRIES VARIABLES
 var categoriesHtml = ['html','css','javascriH3T','jquery'];
 //RANDON QUESTION VARIABLE
 var randonQuestion;
 //--------------HTML---------
+var categoryHtmlQuestions = ['What does HTML mean?', 'What is a P tag','What is a IMG tag'];
+var categoryHtmlOptios = ['Hypertext Markup Language', 'The HTML P element represents a paragraph.','The img tag defines an image in an HTML page']
+//CATEGORY QUESTIONS 2
+var categoryHtmlQuestions2 = ['What does a strong tag do?', 'What is a div tag?','What is a h1 tag?'];
+var categoryHtmlOptios2 = [' Strong tag is used to highlight or emphasize text.', 'The div tag defines a division or a section in an HTML document','The h1 tag in HTML will usually be the title of a post or other emphasized text on the page']
+
 //CATEGORY QUESTION 
-var categoryHtmlQuestions = ['What is HTML', 'What is a P tag','What is a IMG tag'];
-var categoryHtmlOptios = ['Hypertext Markup Language', 'Represents a paragraph','The img tag defines an image in an HTML page']
+
 //CONVERT TO RANDON THE VARIABLE categoryHtmlQuestions
 var categoryHtmlQuestionsRandon = categoryHtmlQuestions[Math.floor(Math.random() * categoryHtmlQuestions.length)]
 //--------------HTML---------
@@ -31,6 +39,10 @@ var loser = '';
 //INTERVAL TIMER
 var timer = 5 + 1;
 var timerV;
+// DISPLAY TOP NAV FUNCTION
+ function displayNav(){
+     $(".buttons-container").show();
+ }
 function timerFuntion(){
 
  timerV = setInterval(activateTimer, 1000);
@@ -40,15 +52,18 @@ function activateTimer(){
     $("#timer").html("Timer: " + timer).css("color", "green");
    
     if(timer === 0){
-        
+        nextButtonFunction();
         loser++;
         $(".loser").html("Wrong " + loser);
         $(".score").show();
         $(".play").hide();
         $(".wrong").show();
+        $(".answer").hide();
         $(".wrong-container").html("Times's Up");
         $("#timer").html("Timer: " + timer).css("color", "red");
         clearInterval(timerV)
+        pauseBackgroundSound();
+
        
     }
 }
@@ -90,10 +105,37 @@ function pauseBackgroundSound(){
     
     questionBackGroundSound.pause();
 }
+var counter = 0;
+function displayCategory(){
+    alert(categoriesHtml[counter])
+}
+function nextButtonFunction(){
+    var nextButton = $("<button>");
+    nextButton.attr("id", "next");
+    nextButton.attr("data-next", "next");
+    nextButton.addClass("next");
+    nextButton.html("Next");
+    
+    $(".main-background").append(nextButton);
+    $(".next").click(function(){
+        
+        displayCategory();
+        counter++;
+        if(counter === categoriesHtml.length){
+            counter = 0;
+        }
+    })
+}
 
-
-
-
+//WINNER SCREEN FUNTION
+function winnerScreen(){
+    $(".winner").html("Correct " + winner);
+    $(".score").show();
+   $(".play").hide();
+   $(".correct").show();
+   $(".correct-container").html("CORRECT");
+  
+}
 
 //CATEGORIES FUNCTION
 var categoriesFuntion = function(){
@@ -107,9 +149,12 @@ var categoriesFuntion = function(){
             $(".categories-container").append(category);
 
             $(category).on('click', function(){
-                clickSound.play();
+                displayNav();
+              clickSound.play();
                 console.log($(this).attr("id"));
                 if($(this).attr("id") === "html"){
+                    //Play background sound
+                    playBackgroundSound();
                     //TIMER FUNTION
                     timerFuntion()
                     //HTML FUNTION
@@ -173,20 +218,19 @@ function showCategoriesFuntions(){
                   //ALEX COMTINUE WORKING  HERE
                   $(categoryNewDiv).on('click', function(){
                     
-                   
+                   //WINNER WINDOW CODE
                     if($(this).attr("data-id") === categoryHtmlQuestionsRandon ){
+                        pauseBackgroundSound();
                         sounds.correct.play();
                         winner++;
-                        $(".winner").html("Correct " + winner);
-                        $(".score").show();
-                       $(".play").hide();
-                       $(".correct").show();
-                       $(".correct-container").html("CORRECT");
-                       $(".correct-answer-container").append($(this).attr("title"));
+                        $(".answer").append($(this).attr("title"));
+                        winnerScreen();
                        clearInterval(timerV);
+                       nextButtonFunction();
                         
 
                       }else{
+                        pauseBackgroundSound();
                         sounds.incorrect.play();
                         loser++;
                         $(".loser").html("Wrong " + loser);
@@ -195,19 +239,16 @@ function showCategoriesFuntions(){
                         $(".wrong").show();
                         $(".wrong-container").html("WRONG");
                         if(categoryHtmlQuestionsRandon === categoryHtmlQuestions[0]){
-                            $(".correct-answer-container").html(categoryHtmlOptios[0]).css("border","2px solid green");
+                            $(".answer").html(categoryHtmlOptios[0]).css("border","2px solid green");
                         }else if(categoryHtmlQuestionsRandon === categoryHtmlQuestions[1]){
-                            $(".correct-answer-container").html(categoryHtmlOptios[1]).css("border","2px solid green");
+                            $(".answer").html(categoryHtmlOptios[1]).css("border","2px solid green");
                         }else if(categoryHtmlQuestionsRandon === categoryHtmlQuestions[2]){
-                            $(".correct-answer-container").html(categoryHtmlOptios[2]).css("border","2px solid green");
-                        }else{
-                            $(".correct-answer-container").html("NOP"); 
+                            $(".answer").html(categoryHtmlOptios[2]).css("border","2px solid green");
                         }
                         
                         clearInterval(timerV);
-                        if(loser > 0){
-                            
-                        }
+                        
+                        nextButtonFunction();
                       }
                       
                   })
@@ -221,8 +262,7 @@ function showCategoriesFuntions(){
         
 function startGame(){
     hideLaunchScreen();
-    playBackgroundSound();
-    categoriesFuntion();
+   categoriesFuntion();
   
 
 }
