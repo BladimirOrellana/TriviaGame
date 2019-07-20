@@ -189,12 +189,22 @@ font-size: 20px;
       position: absolute;
       border-radius: 10px;
       border: 1px solid white;
-    top: 40%;
+    top: 60%;
     left: 50%;
-    transform: translate(-50%, -40%); 
+    transform: translate(-50%, -60%); 
 
   }
-
+.categories-title{
+    color: white;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    position: absolute;
+    border-radius: 10px;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%); 
+}
   .category{
       display: block;
       margin-top: 10px;
